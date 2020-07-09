@@ -7,16 +7,10 @@ bot = telebot.TeleBot(config.token)
 
 user_dict = {}
 
+# Smiles
 
-# class User:
-#     def __init__(self, city):
-#         self.city = city
-#         # fullname, phone, device, brand, model, problem
-#         keys = ['fullname', 'phone', 'device',
-#                 'brand', 'model', 'problem']
-#
-#         for key in keys:
-#             self.key = None
+
+
 class User:
     def __init__(self, fullname):
         self.fullname = fullname
@@ -31,25 +25,29 @@ class User:
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    itembtn1 = types.KeyboardButton('/about')
+    itembtn1 = types.KeyboardButton('/contacts')
     itembtn2 = types.KeyboardButton('/reg')
     itembtn3 = types.KeyboardButton('/start')
     markup.add(itembtn1, itembtn2, itembtn3)
 
     bot.send_message(message.chat.id, "Здравствуйте "
                      + message.from_user.first_name
-                     + ", Я бот сервисного центра *IT-S | Service*, чтобы вы хотели узнать? "
-                     + "\n /about - О нашей компании "
-                     + "\n /reg - Оставить заявку "
-                     + "\n /start - Начать сначала ", reply_markup=markup)
+                     + ",\n Я бот сервисного центра 🔥 *IT-S | Service* 🔥, чтобы вы хотели узнать? "
+                     + "\n /contacts - Контакты 📞"
+                     + "\n /reg - Оставить заявку 📒"
+                     + "\n /start - Начать сначала 💪", reply_markup=markup)
 
 
 # /about
-@bot.message_handler(commands=['about'])
+@bot.message_handler(commands=['contacts'])
 def send_about(message):
-    bot.send_message(message.chat.id, "Наш сервисный центр занимается компонентным ремонтом материнских плат и"
-                     + " за долгое время хорошо зарекомендовал себя на рынке услуг по ремонту техники. "
-                     + "Фирма работает с 2016 года")
+    bot.send_message(message.chat.id, "Наши контакты:  \n" +
+                                      "📞 Тел. +7 910 112 87 99 \n" +
+                                      "📞 Тел. +7 4812 56 77 01 \n" +
+                                      "\n" +
+                                      "📧 e-mail: itsystemsmol@gmail.com \n" +
+                                      "📱 VK: https://vk.com/its67 \n" +
+                                      "📷 Insagram: https://www.instagram.com/itsystem67/")
 
 
 # /reg
@@ -59,8 +57,8 @@ def user_reg(message):
     markup = types.ReplyKeyboardRemove(selective=False)
 
     msg = bot.reply_to(message, """\
-    Здраствуйте, Я бот сервисного центра *IT-S | Service*
-    Сейчас мы с Вами составим заявку на ремонт и наши менеджеры свяжутся с Вами в ближайшее время :)
+    🔥 Здраствуйте, Я бот сервисного центра *IT-S | Service* 🔥
+    Сейчас мы с Вами составим заявку 📒 на ремонт и наши менеджеры свяжутся с Вами в ближайшее время :)
     Введите ваше имя и фамилию?
     """)
 
